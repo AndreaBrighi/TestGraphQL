@@ -1,0 +1,26 @@
+{
+  "name": "testgraphql",
+  "version": "1.0.0",
+  "description": "Creation of a basic server that use GraphQL",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --exit-child src/index.ts",
+    "start": "ts-node src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.8.2",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@graphql-tools/schema": "^10.0.0",
+    "fastify": "^4.23.2",
+    "graphql": "^16.8.1",
+    "graphql-helix": "^1.13.0",
+    "graphql-import-node": "^0.0.5"
+  }
+}
