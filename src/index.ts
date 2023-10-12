@@ -3,6 +3,7 @@ import 'graphql-import-node';
 import fastify from "fastify";
 import { getGraphQLParameters, processRequest, renderGraphiQL, Request, sendResult, shouldRenderGraphiQL } from "graphql-helix";
 import { schema } from "./schema/schema";
+import { contextFactory } from "./context";
 
 async function main() {
   const server = fastify();
@@ -35,6 +36,7 @@ async function main() {
           request,
           schema,
           operationName,
+          contextFactory,
           query,
           variables,
         });
