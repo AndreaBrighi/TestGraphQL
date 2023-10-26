@@ -24,6 +24,7 @@
     "@graphql-tools/schema": "^10.0.0",
     "bcryptjs": "^2.4.3",
     "fastify": "^4.23.2",
+    "git-conventional-commits": "^2.6.5",
     "graphql": "^16.8.1",
     "graphql-helix": "^1.13.0",
     "graphql-import-node": "^0.0.5",
