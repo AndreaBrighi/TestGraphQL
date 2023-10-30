@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --exit-child src/index.ts",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "build": "tsc --build && (copy .\\src\\schema\\*.graphql .\\dist\\schema || cp ./src/schema/*.graphql ./dist/schema)",
+    "clean": "tsc --build --clean"
   },
   "keywords": [],
   "author": "",
