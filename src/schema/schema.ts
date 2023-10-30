@@ -1,6 +1,6 @@
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import typeDefs from "./schema.graphql";
-import { Link, User } from "@prisma/client";
+import { Link, Prisma, User } from "@prisma/client";
 import { hash, compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { GraphQLContext } from "./../context";
@@ -12,7 +12,16 @@ const resolvers = {
     info: () => `This is the API of a Hackernews Clone`,
     feed: async (
       parent: unknown,
-      args: { filter?: string; skip?: number; take?: number },
+      args: {
+        filter?: string;
+        skip?: number;
+        take?: number;
+        orderBy?: {
+          description?: Prisma.SortOrder;
+          url?: Prisma.SortOrder;
+          createdAt?: Prisma.SortOrder;
+        };
+      },
       context: GraphQLContext
     ) => {
       const where = args.filter
@@ -24,11 +33,18 @@ const resolvers = {
           }
         : {};
 
-      return context.prisma.link.findMany({
+      const totalCount = await context.prisma.link.count({ where });
+      const links = await context.prisma.link.findMany({
         where,
         skip: args.skip,
         take: args.take,
+        orderBy: args.orderBy,
       });
+
+      return {
+        count: totalCount,
+        links,
+      };
     },
     me: (parent: unknown, args: {}, context: GraphQLContext) => {
       if (context.currentUser === null) {

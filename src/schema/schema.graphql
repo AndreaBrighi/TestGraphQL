@@ -1,6 +1,6 @@
 type Query {
   info: String!
-  feed(filter: String, skip: Int, take: Int): [Link!]!
+  feed(filter: String, skip: Int, take: Int, orderBy: LinkOrderByInput): Feed!
   me: User!
 }
 
@@ -40,4 +40,20 @@ type Vote {
 type Subscription {
   newLink: Link
   newVote: Vote
+}
+
+input LinkOrderByInput {
+  description: Sort
+  url: Sort
+  createdAt: Sort
+}
+
+enum Sort {
+  asc
+  desc
+}
+
+type Feed {
+  links: [Link!]!
+  count: Int!
 }
